@@ -17,7 +17,7 @@ public class FileAccessor {
 
     public static void writeLinesToFile3(List<String> lines, File file) {}
 
-    public static void main() {
+    public static void main(String[] args) {
         File projectDir = new File(System.getProperty("basedir", System.getProperty("user.dir")));
         File testFile = new File(projectDir, "target/test.txt");
         List<String> lines = Arrays.asList("AAA", "BBB", "CCC");
