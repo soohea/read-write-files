@@ -2,7 +2,6 @@ package com.github.hcsp.io;
 
 import org.apache.commons.io.FileUtils;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,18 +17,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 public class FileAccessor {
 
     public static List<String> readFile1(File file) throws IOException {
         List<String> list;
-        InputStream inputStream = new FileInputStream(file);
         StringBuffer stringBuffer = new StringBuffer();
+        InputStream inputStream = new FileInputStream(file);
         while (true) {
             int i = inputStream.read();
             if (i == -1) {
                 String string = new String(stringBuffer);
-                list = Arrays.asList(string.split("\r\n"));
+                list = Arrays.asList(string.split("\n"));
                 break;
             }
             char a = (char) i;
