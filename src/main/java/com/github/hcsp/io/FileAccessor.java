@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FileAccessor {
-
     public static List<String> readFile1(File file) throws IOException {
         List<String> list;
         StringBuffer stringBuffer = new StringBuffer();
@@ -27,7 +26,7 @@ public class FileAccessor {
             int i = inputStream.read();
             if (i == -1) {
                 String string = new String(stringBuffer);
-                list = Arrays.asList(string.split("\n"));
+                list = Arrays.asList(string.split("\r\n"));
                 break;
             }
             char a = (char) i;
@@ -57,9 +56,12 @@ public class FileAccessor {
 
     public static void writeLinesToFile1(List<String> lines, File file) throws IOException {
         OutputStream outputStream = new FileOutputStream(file);
-        for (String line : lines) {
-            outputStream.write(line.getBytes());
-            outputStream.write('\n');
+        for (int i = 0; i < lines.size(); i++) {
+            byte[] b = lines.get(i).getBytes();
+            outputStream.write(b);
+            if (i != lines.size() - 1) {
+                outputStream.write("\r\n".getBytes());
+            }
         }
     }
 
