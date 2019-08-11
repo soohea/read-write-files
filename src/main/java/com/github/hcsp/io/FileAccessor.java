@@ -1,23 +1,68 @@
 package com.github.hcsp.io;
 
+import org.apache.commons.io.FileUtils;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class FileAccessor {
-    public static List<String> readFile1(File file) {}
+    public static List<String> readFile1(File file) throws IOException {
+        FileReader fileReader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-    public static List<String> readFile2(File file) {}
+        List<String> list = new ArrayList<>();
+        String line;
 
-    public static List<String> readFile3(File file) {}
+        while ((line = bufferedReader.readLine()) != null) {
+            list.add(line);
+        }
 
-    public static void writeLinesToFile1(List<String> lines, File file) {}
+        bufferedReader.close();
+        return list;
+    }
 
-    public static void writeLinesToFile2(List<String> lines, File file) {}
 
-    public static void writeLinesToFile3(List<String> lines, File file) {}
+    public static List<String> readFile2(File file) throws IOException {
+        Path path = file.toPath();
+        return Files.readAllLines(path, StandardCharsets.UTF_8);
+    }
 
-    public static void main(String[] args) {
+    public static List<String> readFile3(File file) throws IOException {
+        return FileUtils.readLines(file, "UTF-8");
+    }
+
+    public static void writeLinesToFile1(List<String> lines, File file) throws IOException {
+
+        FileWriter fileWriter = new FileWriter(file);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        String lineStr = String.join("\n", lines);
+
+        bufferedWriter.write(lineStr);
+        bufferedWriter.flush();
+        bufferedWriter.close();
+    }
+
+    public static void writeLinesToFile2(List<String> lines, File file) throws IOException {
+        String lineStr = String.join("\n", lines);
+        FileUtils.write(file, lineStr, "UTF-8");
+    }
+
+    public static void writeLinesToFile3(List<String> lines, File file) throws IOException {
+        Path path = file.toPath();
+        Files.write(path, lines, StandardCharsets.UTF_8);
+    }
+
+    public static void main(String[] args) throws IOException {
         File projectDir = new File(System.getProperty("basedir", System.getProperty("user.dir")));
         File testFile = new File(projectDir, "target/test.txt");
         List<String> lines = Arrays.asList("AAA", "BBB", "CCC");
