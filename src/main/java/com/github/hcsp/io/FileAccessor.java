@@ -44,9 +44,9 @@ public class FileAccessor {
         BufferedWriter bufferedWriter = Files.newBufferedWriter(file.toPath());
         for (String s: lines) {
             bufferedWriter.write(s);
+            bufferedWriter.newLine();
         }
-
-
+        bufferedWriter.close();
     }
 
     public static void writeLinesToFile3(List<String> lines, File file) throws IOException {
