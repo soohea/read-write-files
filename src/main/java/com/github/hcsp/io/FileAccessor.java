@@ -2,7 +2,12 @@ package com.github.hcsp.io;
 
 import org.apache.commons.io.FileUtils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +19,7 @@ public class FileAccessor {
         try (FileInputStream fis = new FileInputStream(file)) {
             String str = "";
             while (fis.available() > 0) {
-                str += (char)fis.read();
+                str += (char) fis.read();
             }
             res = Arrays.asList(str.split("[\n]"));
         } catch (IOException e) {
@@ -50,7 +55,7 @@ public class FileAccessor {
             lines.forEach(l -> {
                 Arrays.asList(l.split("")).forEach(c -> {
                     try {
-                        fos.write((int)c.charAt(0));
+                        fos.write((int) c.charAt(0));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
