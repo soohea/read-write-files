@@ -1,6 +1,7 @@
 package com.github.hcsp.io;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,18 +16,18 @@ import java.util.List;
 
 public class FileAccessor {
     public static List<String> readFile1(File file) {
-        List<String> res = new ArrayList<>();
+        List<String> res;
         try (FileInputStream fis = new FileInputStream(file)) {
-            String str = "";
+            List<Character> charList = new ArrayList<>();
             while (fis.available() > 0) {
-                str += (char) fis.read();
+                charList.add((char) fis.read());
             }
+            String str = StringUtils.join(charList, "");
             res = Arrays.asList(str.split("[\n]"));
         } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            return res;
+            throw new IllegalArgumentException();
         }
+        return res;
     }
 
     public static List<String> readFile2(File file) {
