@@ -3,6 +3,7 @@ package com.github.hcsp.io;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -28,6 +29,14 @@ public class FileAccessorTest {
         File tmp = File.createTempFile("tmp", "");
         List<String> list = Arrays.asList("a", "b", " ", "   ", "c");
         FileAccessor.writeLinesToFile3(list, tmp);
+        Assertions.assertEquals(list, FileAccessor.readFile3(tmp));
+    }
+
+    @Test
+    public void test4() throws Exception {
+        File tmp = File.createTempFile("tmp", "");
+        List<String> list = Arrays.asList("a", "b", " ", "   ", "c");
+        FileAccessor.writeLinesToFile4(list, tmp);
         Assertions.assertEquals(list, FileAccessor.readFile3(tmp));
     }
 }
