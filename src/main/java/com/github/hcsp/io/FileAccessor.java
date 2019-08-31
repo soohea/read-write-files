@@ -22,8 +22,10 @@ public class FileAccessor {
         try {
             bufferedReader = new BufferedReader(new FileReader(file));
             String line;
-            while((line = bufferedReader.readLine()) != null)
-            lines.add(line);
+            while((line = bufferedReader.readLine()) != null) {
+                lines.add(line);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
