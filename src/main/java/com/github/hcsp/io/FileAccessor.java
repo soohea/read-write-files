@@ -3,9 +3,7 @@ package com.github.hcsp.io;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +20,7 @@ public class FileAccessor {
         try {
             bufferedReader = new BufferedReader(new FileReader(file));
             String line;
-            while((line = bufferedReader.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
                 lines.add(line);
             }
 
@@ -45,13 +43,14 @@ public class FileAccessor {
     public static void writeLinesToFile1(List<String> lines, File file) throws IOException {
         FileUtils.writeLines(file, lines);
     }
-//
+
+    //
     public static void writeLinesToFile2(List<String> lines, File file) {
         BufferedWriter bufferedWriter = null;
         try {
-             bufferedWriter = new BufferedWriter(new FileWriter(file));
+            bufferedWriter = new BufferedWriter(new FileWriter(file));
             for (String s : lines
-                 ) {
+            ) {
                 bufferedWriter.write(s);
                 bufferedWriter.newLine();
             }
