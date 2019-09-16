@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FileAccessor {
     public static List<String> readFile1(File file) throws IOException {
@@ -24,10 +25,7 @@ public class FileAccessor {
 
         ArrayList<String> infoValue = new ArrayList<>();
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line= bufferedReader.readLine())!=null){
-                infoValue.add(line);
-            }
+            infoValue = bufferedReader.lines().collect(Collectors.toCollection(ArrayList::new));
         } catch (IOException e) {
             e.printStackTrace();
         }
