@@ -12,7 +12,9 @@ public class FileAccessorTest {
         File tmp = File.createTempFile("tmp", "");
         List<String> list = Arrays.asList("a", "b", " ", "   ", "c");
         FileAccessor.writeLinesToFile1(list, tmp);
+        System.out.println(FileAccessor.readFile1(tmp));
         Assertions.assertEquals(list, FileAccessor.readFile1(tmp));
+
     }
 
     @Test
