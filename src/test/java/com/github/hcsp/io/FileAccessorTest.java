@@ -30,4 +30,14 @@ public class FileAccessorTest {
         FileAccessor.writeLinesToFile3(list, tmp);
         Assertions.assertEquals(list, FileAccessor.readFile3(tmp));
     }
+
+    @Test
+    public void testUnexisting() throws Exception {
+        Assertions.assertThrows(
+                Exception.class, () -> FileAccessor.readFile1(new File("unexisting")));
+        Assertions.assertThrows(
+                Exception.class, () -> FileAccessor.readFile2(new File("unexisting")));
+        Assertions.assertThrows(
+                Exception.class, () -> FileAccessor.readFile3(new File("unexisting")));
+    }
 }
