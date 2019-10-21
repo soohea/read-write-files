@@ -1,6 +1,7 @@
 package com.github.hcsp.io;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -29,10 +30,16 @@ public class FileAccessor {
 
     public static List<String> readFile3(File file) throws IOException {
         List<String> list = new ArrayList<>();
+        List<String> list2 = new ArrayList<>();
         FileInputStream is = new FileInputStream(file);
 
         for (int a = is.read(); a != -1; a = is.read()) {
-            list.add(String.valueOf((char) a));
+            if (a != '\n') {
+                list2.add(String.valueOf((char) a));
+            } else {
+                list.add(StringUtils.join(list2.toArray()));
+                list2.clear();
+            }
         }
         is.close();
         return list;
