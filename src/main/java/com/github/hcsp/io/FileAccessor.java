@@ -1,26 +1,59 @@
 package com.github.hcsp.io;
-
-import java.io.File;
+import org.apache.commons.io.FileUtils;
+import java.io.*;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class FileAccessor {
-    public static List<String> readFile1(File file) {}
+    public static List<String> readFile1(File file) throws IOException {
+        List<String> list = new ArrayList<>();
+        BufferedReader brd = new BufferedReader(new FileReader(file));
+        String str;
+        while (true) {
+             str = brd.readLine();
+            if (str == null) {
+                break;
+            }
+            list.add(str);
+        }
+        return list;
+    }
 
-    public static List<String> readFile2(File file) {}
+    public static List<String> readFile2(File file) throws IOException {
+        return Files.readAllLines(file.toPath());
+    }
 
-    public static List<String> readFile3(File file) {}
+    public static List<String> readFile3(File file) throws IOException {
+        List<String> list = new ArrayList<>();
+        list = FileUtils.readLines(file, "utf-8");
+        return list;
+    }
 
-    public static void writeLinesToFile1(List<String> lines, File file) {}
+    public static void writeLinesToFile1(List<String> lines, File file) throws IOException {
+        BufferedWriter bwt = new BufferedWriter(new FileWriter(file));
+        for (String str : lines) {
+            bwt.write(str);
+            bwt.newLine();
+        }
+        bwt.flush();
+        bwt.close();
+    }
 
-    public static void writeLinesToFile2(List<String> lines, File file) {}
+    public static void writeLinesToFile2(List<String> lines, File file) throws IOException {
+        Files.write(file.toPath(), lines);
+    }
 
-    public static void writeLinesToFile3(List<String> lines, File file) {}
+    public static void writeLinesToFile3(List<String> lines, File file) throws IOException {
+        FileUtils.writeLines(file, lines);
+    }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         File projectDir = new File(System.getProperty("basedir", System.getProperty("user.dir")));
         File testFile = new File(projectDir, "target/test.txt");
         List<String> lines = Arrays.asList("AAA", "BBB", "CCC");
+
         writeLinesToFile1(lines, testFile);
         writeLinesToFile2(lines, testFile);
         writeLinesToFile3(lines, testFile);
