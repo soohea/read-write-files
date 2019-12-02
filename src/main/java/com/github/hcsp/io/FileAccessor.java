@@ -31,7 +31,7 @@ public class FileAccessor {
     public static void writeLinesToFile1(List<String> lines, File file) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(file));
         for (String line : lines) {
-            writer.write(line);
+            writer.write(line+"\n");
         }
         writer.flush();
         writer.close();
