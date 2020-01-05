@@ -13,7 +13,7 @@ import static java.nio.file.StandardOpenOption.WRITE;
 public class FileAccessor {
     public static List<String> readFile1(File file) throws IOException {
         if (file != null) {
-            byte[] readFileByBytes = new byte[(int)file.length()];
+            byte[] readFileByBytes = new byte[(int) file.length()];
             InputStream inputFromFile = new FileInputStream(file);
             inputFromFile.read(readFileByBytes);
             String[] stringInFile = new String(readFileByBytes).split("\n");
