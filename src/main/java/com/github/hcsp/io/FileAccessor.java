@@ -1,9 +1,6 @@
 package com.github.hcsp.io;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-import jdk.management.resource.internal.inst.FileInputStreamRMHooks;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
 
 import java.io.*;
 import java.util.ArrayList;
