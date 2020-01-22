@@ -1,62 +1,27 @@
 package com.github.hcsp.io;
 
-import org.apache.commons.io.FileUtils;
-
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
 public class FileAccessor {
-    public static List<String> readFile1(File file) throws IOException {
-        return FileUtils.readLines(file, "UTF-8");
-    }
+    public static List<String> readFile1(File file) {}
 
-    public static List<String> readFile2(File file) throws IOException {
-        FileReader fileReader = new FileReader(file); // A stream that connects to the text file
-        BufferedReader bufferedReader = new BufferedReader(fileReader); // Connect the FileReader to the BufferedReader
-        String line;
-        List<String> lines = new ArrayList<>();
-        while ((line = bufferedReader.readLine()) != null) {
-            lines.add(line);
-        }
-        bufferedReader.close();
-        return lines;
-    }
+    public static List<String> readFile2(File file) {}
 
-    public static List<String> readFile3(File file) throws IOException {
-        return Files.readAllLines(Paths.get(file.getAbsolutePath()));
-    }
+    public static List<String> readFile3(File file) {}
 
-    public static void writeLinesToFile1(List<String> lines, File file) throws IOException {
-        FileUtils.writeLines(file, lines);
-    }
+    public static void writeLinesToFile1(List<String> lines, File file) {}
 
-    public static void writeLinesToFile2(List<String> lines, File file) throws IOException {
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-        for (String line : lines) {
-            //这里的换行函数适合所有系统
-            bufferedWriter.write(line + System.lineSeparator());
-            bufferedWriter.flush();
-        }
-        bufferedWriter.close();
-    }
+    public static void writeLinesToFile2(List<String> lines, File file) {}
 
-    public static void writeLinesToFile3(List<String> lines, File file) throws IOException {
-        Files.write(Paths.get(file.getAbsolutePath()), lines);
-    }
+    public static void writeLinesToFile3(List<String> lines, File file) {}
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         File projectDir = new File(System.getProperty("basedir", System.getProperty("user.dir")));
         File testFile = new File(projectDir, "target/test.txt");
         List<String> lines = Arrays.asList("AAA", "BBB", "CCC");
-        try {
-            writeLinesToFile1(lines, testFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        writeLinesToFile1(lines, testFile);
         writeLinesToFile2(lines, testFile);
         writeLinesToFile3(lines, testFile);
 
