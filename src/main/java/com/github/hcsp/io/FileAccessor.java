@@ -1,7 +1,7 @@
 package com.github.hcsp.io;
 
 
-import org.apache.commons.io.FileUtils;
+
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;
@@ -9,10 +9,9 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
-import static org.apache.commons.io.FileUtils.writeLines;
+import java.util.List;
+;
 
 public class FileAccessor {
     public static List<String> readFile1(File file) throws IOException {
