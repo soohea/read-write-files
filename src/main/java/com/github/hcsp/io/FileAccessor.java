@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import java.util.List;
-;
 
 public class FileAccessor {
     public static List<String> readFile1(File file) throws IOException {
