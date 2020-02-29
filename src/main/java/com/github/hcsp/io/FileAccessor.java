@@ -30,7 +30,8 @@ public class FileAccessor {
     }
 
     public static void writeLinesToFile1(List<String> lines, File file) throws IOException {
-        Files.write(file.toPath(), lines);
+        OutputStream outputStream = new FileOutputStream(file);
+        IOUtils.writeLines(lines, "\r\n", outputStream, Charset.defaultCharset());
     }
 
 
