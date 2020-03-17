@@ -10,16 +10,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FileAccessor {
-    /**
-     * 1) Apache Commons IO
-     */
     public static List<String> readFile1(File file) throws IOException {
         return FileUtils.readLines(file, Charset.defaultCharset());
     }
 
-    /**
-     * 2) InputStream
-     */
     public static List<String> readFile2(File file) throws IOException {
         InputStream in = new FileInputStream(file);
         StringBuilder result = new StringBuilder();
@@ -31,9 +25,6 @@ public class FileAccessor {
         return Arrays.asList(result.toString().split("\\r\\n"));
     }
 
-    /**
-     * 3) BufferedReader
-     */
     public static List<String> readFile3(File file) throws IOException {
         List<String> rl = new ArrayList<>();
         BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
@@ -45,9 +36,6 @@ public class FileAccessor {
         return rl;
     }
 
-    /**
-     * 4) 使用Java 7+的NIO引入的 Files
-     */
     public static List<String> readFile4(File file) throws IOException {
         return Files.readAllLines(file.toPath());
     }
