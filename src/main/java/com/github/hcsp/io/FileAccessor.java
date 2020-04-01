@@ -1,9 +1,7 @@
 package com.github.hcsp.io;
 
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -43,7 +41,9 @@ public class FileAccessor {
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         for (String line : lines) {
             bufferedWriter.write(line);
+            bufferedWriter.newLine();
         }
+        bufferedWriter.flush();
         bufferedWriter.close();
     }
 
