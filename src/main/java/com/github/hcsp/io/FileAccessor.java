@@ -6,23 +6,12 @@ import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class FileAccessor {
-    //原始的FileInputStream，一个字符一个字符的读取
+    //使用第三方库，Apache Commons IO
     public static List<String> readFile1(File file) throws IOException {
-        InputStream is = new FileInputStream(file);
-        List<String> list = new ArrayList<>();
-
-        while (true) {
-            int a = is.read();
-            if (a == -1) {
-                break;
-            }
-            list.add(String.valueOf((char) a));
-        }
-        is.close();
+        List<String> list = FileUtils.readLines(file, "UTF-8");
         return list;
     }
 
@@ -46,22 +35,10 @@ public class FileAccessor {
         return Files.readAllLines(file.toPath());
     }
 
-    //使用第三方库，Apache Commons IO
-    public static List<String> readFile4(File file) throws IOException {
-        List<String> list = new ArrayList<>();
-        return list = Collections.singletonList(FileUtils.readFileToString(file));
-    }
 
-    //原始的FileOutputStream，一个字符一个字符的读取
+    // 使用第三方库，Apache Commons IO
     public static void writeLinesToFile1(List<String> lines, File file) throws IOException {
-        FileOutputStream fos = new FileOutputStream(file);
-        String s = "";
-        for (String a : lines) {
-            s += a;
-        }
-        byte[] bytes = s.getBytes();
-        fos.write(bytes);
-        fos.close();
+        FileUtils.writeLines(file, lines);
     }
 
     //使用BufferWriter，一行一行地读文件
@@ -81,20 +58,12 @@ public class FileAccessor {
         String s = "";
         for (String a : lines) {
             s += a;
+            s += "\n";
         }
         Files.write(file.toPath(), s.getBytes());
 
     }
 
-    // 使用第三方库，Apache Commons IO
-    public static void writeLinesToFile4(List<String> lines, File file) throws IOException {
-        String s = "";
-        for (String a : lines) {
-            s += a;
-        }
-        FileUtils.writeStringToFile(file, s, "GBK");
-
-    }
 
     public static void main(String[] args) throws IOException {
         File projectDir = new File(System.getProperty("basedir", System.getProperty("user.dir")));
@@ -108,10 +77,6 @@ public class FileAccessor {
 
         writeLinesToFile3(lines, testFile);
         System.out.println(readFile3(testFile));
-
-        writeLinesToFile4(lines, testFile);
-        System.out.println(readFile4(testFile));
-
 
     }
 }
