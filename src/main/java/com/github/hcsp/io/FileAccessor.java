@@ -23,18 +23,18 @@ public class FileAccessor {
     }
 
     public static List<String> readFile2(File file) throws IOException {
-        try (FileInputStream fileInputStream = new FileInputStream(file);
-             BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);) {
-            StringBuilder stringBuilder = new StringBuilder();
+        try (FileReader fileReader = new FileReader(file); BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+            List<String> lists = new ArrayList<>();
             while (true) {
-                int value = bufferedInputStream.read();
-                if (value == -1) {
+                String line = bufferedReader.readLine();
+                if (line == null) {
                     break;
+                } else {
+                    lists.add(line);
                 }
-                stringBuilder.append((char) value);
             }
-            String[] lines = stringBuilder.toString().split("\n");
-            return Arrays.asList(lines);
+
+            return lists;
         }
     }
 
@@ -54,15 +54,16 @@ public class FileAccessor {
     }
 
     public static void writeLinesToFile2(List<String> lines, File file) throws IOException {
-        try (FileOutputStream fileOutputStream = new FileOutputStream(file, false);
-             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);) {
-            for (String line :
-                    lines) {
-                line = line + "\n";
-                byte[] byteArray = line.getBytes();
-                bufferedOutputStream.write(byteArray);
+        try (FileWriter fileWriter = new FileWriter(file, false);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);) {
+            for (int i = 0; i < lines.size(); i++) {
+                String line = lines.get(i);
+                bufferedWriter.write(line);
+                if (i < lines.size() - 1) {
+                    bufferedWriter.newLine();
+                }
             }
-            bufferedOutputStream.flush();
+            bufferedWriter.flush();
         }
     }
 
