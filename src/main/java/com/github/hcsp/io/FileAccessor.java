@@ -73,8 +73,13 @@ public class FileAccessor {
         writeLinesToFile2(lines, testFile);
         writeLinesToFile3(lines, testFile);
 
+        System.out.println("jjj");
+
         System.out.println(readFile1(testFile));
+        System.out.println("jjj");
+
         System.out.println(readFile2(testFile));
+        System.out.println("jjj");
         System.out.println(readFile3(testFile));
     }
 }
