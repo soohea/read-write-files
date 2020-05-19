@@ -2,7 +2,13 @@ package com.github.hcsp.io;
 
 import org.apache.commons.io.FileUtils;
 
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -33,21 +39,13 @@ public class FileAccessor {
     }
 
 
-    // 写入出了什么问题呢
     public static void writeLinesToFile1(List<String> lines, File file) throws IOException {
         Files.write(file.toPath(), lines);
     }
 
     public static void writeLinesToFile2(List<String> lines, File file) throws IOException {
 
-//        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-//        ArrayList<String> list = new ArrayList<>();
-//        String line = null;
-//        while ((line = bufferedReader.readLine()) != null) {
-//            list.add(line);
-//        }
-//        bufferedReader.close();
-//        return list;
+
         BufferedWriter writer = new BufferedWriter(new FileWriter(file));
         for (String line : lines) {
             writer.write(line);
@@ -58,7 +56,6 @@ public class FileAccessor {
     }
 
 
-    // 这个是没错的
     public static void writeLinesToFile3(List<String> lines, File file) throws IOException {
         FileUtils.writeLines(file, lines);
     }
