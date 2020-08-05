@@ -1,73 +1,23 @@
 package com.github.hcsp.io;
 
-import org.apache.commons.io.FileUtils;
-import java.io.*;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
 public class FileAccessor {
-    public static List<String> readFile1(File file) throws IOException {
-        InputStream in = new FileInputStream(file);
-        List<String> result = new ArrayList<>();
-        StringBuffer sb = new StringBuffer();
+    public static List<String> readFile1(File file) {}
 
-        while (true) {
-            int read = in.read();
-            if (read == -1) {
-                break;
-            }
-            if (read != 10) {
-                sb.append((char) read);
-            } else {
-                result.add(sb.toString());
-                sb.delete(0, sb.length());
-            }
-        }
-        return result;
+    public static List<String> readFile2(File file) {}
 
-    }
+    public static List<String> readFile3(File file) {}
 
-    public static List<String> readFile2(File file) throws IOException {
-       return FileUtils.readLines(file, Charset.defaultCharset());
-    }
+    public static void writeLinesToFile1(List<String> lines, File file) {}
 
-    public static List<String> readFile3(File file) throws IOException {
-        List<String> list = new ArrayList<>();
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-        String line;
-        while ((line = bufferedReader.readLine()) != null) {
-            list.add(line);
-        }
-        return list;
-    }
+    public static void writeLinesToFile2(List<String> lines, File file) {}
 
-    public static void writeLinesToFile1(List<String> lines, File file) throws IOException {
-        OutputStream out = new FileOutputStream(file);
-        for (int i = 0; i < lines.size(); i++) {
-            byte[] bytes = lines.get(i).getBytes();
-            for (byte b : bytes) {
-                out.write(b);
-            }
-            out.write('\n');
-        }
-    }
+    public static void writeLinesToFile3(List<String> lines, File file) {}
 
-    public static void writeLinesToFile2(List<String> lines, File file) throws IOException {
-        FileUtils.writeLines(file, lines);
-    }
-
-    public static void writeLinesToFile3(List<String> lines, File file) throws IOException {
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-        for (String line : lines) {
-            bufferedWriter.write(line);
-            bufferedWriter.write("\n");
-            bufferedWriter.flush();
-        }
-    }
-
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         File projectDir = new File(System.getProperty("basedir", System.getProperty("user.dir")));
         File testFile = new File(projectDir, "target/test.txt");
         List<String> lines = Arrays.asList("AAA", "BBB", "CCC");
