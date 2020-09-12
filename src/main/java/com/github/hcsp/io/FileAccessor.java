@@ -38,7 +38,7 @@ public class FileAccessor {
         for (String s : lines) {
             bufferedWriter.write(s + "\n");
         }
-       bufferedWriter.close();
+        bufferedWriter.close();
     }
 
     public static void writeLinesToFile2(List<String> lines, File file) throws IOException {
@@ -46,7 +46,7 @@ public class FileAccessor {
     }
 
     public static void writeLinesToFile3(List<String> lines, File file) throws IOException {
-        Files.write(file.toPath(),lines,Charset.defaultCharset()) ;
+        Files.write(file.toPath(), lines, Charset.defaultCharset());
 
     }
 
