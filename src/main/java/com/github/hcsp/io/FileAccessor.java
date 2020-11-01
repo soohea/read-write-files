@@ -35,7 +35,7 @@ public class FileAccessor {
     }
 
     public static void writeLinesToFile1(List<String> lines, File file) throws IOException {
-        // 使用 FilesUtils
+        // 使用 FilesUtils，FilesUtils不会自动换行，要手动添加
         for (String line :
                 lines) {
             FileUtils.write(file, line, true);
@@ -56,7 +56,7 @@ public class FileAccessor {
             bufferedWriter.write(line);
             bufferedWriter.newLine();
         }
-        // 重要，没有会输出不了
+        // 重要，没有close()会输出不了
         bufferedWriter.close();
         fileWriter.close();
     }
