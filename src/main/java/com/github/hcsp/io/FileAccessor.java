@@ -12,7 +12,8 @@ import java.util.List;
 public class FileAccessor {
     public static List<String> readFile1(File file) throws IOException {
         // 使用 CommonIO 的 FileUtils 读取文件内容
-        return FileUtils.readLines(file);
+        List<String> lines = FileUtils.readLines(file);
+        return lines;
     }
 
     public static List<String> readFile2(File file) throws IOException {
@@ -29,6 +30,8 @@ public class FileAccessor {
         while ((nextLine = bufferedReader.readLine()) != null) {
             results.add(nextLine);
         }
+        bufferedReader.close();
+        fileReader.close();
         return results;
     }
 
@@ -37,6 +40,7 @@ public class FileAccessor {
         for (String line :
                 lines) {
             FileUtils.write(file, line, true);
+            FileUtils.write(file, "\n", true);
         }
     }
 
@@ -51,7 +55,11 @@ public class FileAccessor {
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         for (String line : lines) {
             bufferedWriter.write(line);
+            bufferedWriter.newLine();
         }
+        // 重要，没有会输出不了
+        bufferedWriter.close();
+        fileWriter.close();
     }
 
     public static void main(String[] args) throws IOException {
