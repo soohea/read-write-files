@@ -12,8 +12,7 @@ import java.util.List;
 public class FileAccessor {
     public static List<String> readFile1(File file) throws IOException {
         // 使用 CommonIO 的 FileUtils 读取文件内容
-        List<String> lines = FileUtils.readLines(file);
-        return lines;
+        return FileUtils.readLines(file);
     }
 
     public static List<String> readFile2(File file) throws IOException {
