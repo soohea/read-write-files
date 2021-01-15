@@ -17,11 +17,8 @@ public class FileAccessor {
     public static List<String> readFile2(File file) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         List<String> list = new ArrayList<>();
-        while (true) {
-            String string = reader.readLine();
-            if (string == null) {
-                break;
-            }
+        String string;
+        while ((string = reader.readLine()) != null) {
             list.add(string);
         }
         return list;
@@ -36,10 +33,13 @@ public class FileAccessor {
     }
 
     public static void writeLinesToFile2(List<String> lines, File file) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-        writer.write(String.valueOf(lines));
-        writer.flush();
-        writer.close();
+        FileWriter fileWriter = new FileWriter(file);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        for (String line : lines) {
+            bufferedWriter.write(line);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        }
     }
 
     public static void writeLinesToFile3(List<String> lines, File file) throws IOException {
