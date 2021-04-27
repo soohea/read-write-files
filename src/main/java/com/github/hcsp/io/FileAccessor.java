@@ -10,47 +10,22 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FileAccessor {
-    public static List<String> readFile1(File file) {
-        List<String> result = null;
-        try {
-            result = FileUtils.readLines(file, Charset.defaultCharset());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
+    public static List<String> readFile1(File file) throws IOException {
+        return FileUtils.readLines(file, Charset.defaultCharset());
     }
 
-    public static List<String> readFile2(File file) {
-        List<String> result = null;
-        try {
-            result = Files.readAllLines(file.toPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
+    public static List<String> readFile2(File file) throws IOException {
+        return Files.readAllLines(file.toPath());
     }
 
-    public static List<String> readFile3(File file) {
+    public static List<String> readFile3(File file) throws IOException {
         List<String> result = new ArrayList<>();
-        BufferedReader reader = null;
-        try {
-            String temp;
-            reader = new BufferedReader(new FileReader(file));
-            while ((temp = reader.readLine()) != null) {
-                result.add(temp);
-            }
-            reader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        String temp;
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        while ((temp = reader.readLine()) != null) {
+            result.add(temp);
         }
+        reader.close();
         return result;
     }
 
@@ -75,7 +50,7 @@ public class FileAccessor {
         try {
             writer = new BufferedWriter(new FileWriter(file));
             for (String element : lines) {
-                writer.write(element);
+                writer.write(element + "\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -90,7 +65,7 @@ public class FileAccessor {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         File projectDir = new File(System.getProperty("basedir", System.getProperty("user.dir")));
         File testFile = new File(projectDir, "target/test.txt");
         List<String> lines = Arrays.asList("AAA", "BBB", "CCC");
