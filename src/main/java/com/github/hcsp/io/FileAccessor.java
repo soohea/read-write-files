@@ -22,15 +22,15 @@ public class FileAccessor {
     }
 
     public static void writeLinesToFile1(List<String> lines, File file) throws IOException {
-        FileUtils.writeLines(file,lines);
+        FileUtils.writeLines(file, lines);
     }
 
     public static void writeLinesToFile2(List<String> lines, File file) throws IOException {
-        FileUtils.writeLines(file,lines);
+        FileUtils.writeLines(file, lines);
     }
 
     public static void writeLinesToFile3(List<String> lines, File file) throws IOException {
-        FileUtils.writeLines(file,lines);
+        FileUtils.writeLines(file, lines);
     }
 
     public static void main(String[] args) throws IOException {
