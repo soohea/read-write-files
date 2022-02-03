@@ -20,7 +20,7 @@ public class FileAccessor {
                 list.add(stringBuilder.toString());
                 stringBuilder.delete(0, stringBuilder.length());
             } else {
-                stringBuilder.append(num);
+                stringBuilder.append((char) num);
             }
         }
         return list;
